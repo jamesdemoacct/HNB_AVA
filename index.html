@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jack's Checking — Account Activity</title>
+<title>Jack's Checking — Accounts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --deep-green: #61b127;
+    --deep-green: #0B3D2E;
     --mid-green: #146C43;
     --accent-green: #1E8E5A;
     --pale-green: #EAF5EE;
@@ -73,128 +73,82 @@
     cursor: pointer;
   }
 
-  /* Balance */
-  .balance-block {
-    padding: 22px 20px 18px;
-    text-align: center;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  .balance-label {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-
-  .balance-amount {
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
-  .balance-sub {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
-  /* Tabs */
-  .tabs {
-    display: flex;
-    padding: 14px 16px 0;
-    gap: 8px;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  .tab {
-    flex: 1;
-    text-align: center;
-    padding: 10px 0 12px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--muted);
-    border-radius: 8px 8px 0 0;
-    cursor: pointer;
-  }
-
-  .tab.active {
-    color: var(--deep-green);
-    font-weight: 600;
-    background: var(--pale-green);
-    border-bottom: 2px solid var(--accent-green);
-  }
-
-  /* Search row */
-  .search-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 20px;
-    color: var(--mid-green);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-
-  .search-row svg { flex-shrink: 0; }
-
-  /* Transaction list */
-  .date-heading {
-    padding: 4px 20px 6px;
+  /* Section heading */
+  .section-heading {
+    padding: 16px 20px 6px;
     font-size: 12px;
     color: var(--muted);
     background: #FAFBFA;
   }
 
-  .txn {
+  /* Account rows */
+  .account-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 20px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--hairline);
     gap: 12px;
   }
 
-  .txn-left {
+  .account-left {
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
 
-  .merchant {
+  .account-name {
     font-size: 15px;
     font-weight: 500;
   }
 
-  .status-tag {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+  .account-number {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--muted);
   }
 
-  .txn-right {
+  .account-right {
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  .amount {
+  .balance {
     font-size: 15px;
     font-weight: 600;
     white-space: nowrap;
+    color: var(--ink);
   }
 
-  .amount.debit { color: var(--debit-red); }
-  .amount.declined { color: var(--muted); text-decoration: line-through; }
+  .balance.negative { color: var(--debit-red); }
+
+  .account-row.has-button {
+    align-items: flex-start;
+  }
+
+  .pay-btn {
+    margin-top: 8px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--mid-green);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+
+  .pay-btn:hover {
+    background: var(--accent-green);
+  }
 
   .chevron {
     color: #C7CDC9;
     font-size: 14px;
   }
-
-  .txn.declined-row .merchant { color: var(--muted); }
 
   .footer-note {
     padding: 16px 20px 22px;
@@ -210,65 +164,48 @@
   <div class="screen">
     <div class="header">
       <span class="back">‹</span>
-      <span class="title">Jack's Checking</span>
+      <span class="title">Accounts</span>
       <span class="done">Done</span>
     </div>
 
-    <div class="balance-block">
-      <div class="balance-label">Available balance</div>
-      <div class="balance-amount">$2,458.41</div>
-      <div class="balance-sub">As of September 16, 2026</div>
-    </div>
+    <div class="section-heading">MY ACCOUNTS</div>
 
-    <div class="tabs">
-      <div class="tab">Summary</div>
-      <div class="tab">Insights</div>
-      <div class="tab active">Activity</div>
-    </div>
-
-    <div class="search-row">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="7"/>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-      SEARCH
-    </div>
-
-    <div class="date-heading">9/16/2026</div>
-
-    <div class="txn">
-      <div class="txn-left">
-        <span class="merchant">Amazon</span>
+    <div class="account-row">
+      <div class="account-left">
+        <span class="account-name">Checking</span>
+        <span class="account-number">*******7986</span>
       </div>
-      <div class="txn-right">
-        <span class="amount debit">-$23.19</span>
+      <div class="account-right">
+        <span class="balance">$4,382.98</span>
         <span class="chevron">›</span>
       </div>
     </div>
 
-    <div class="txn">
-      <div class="txn-left">
-        <span class="merchant">Panera Bread</span>
+    <div class="account-row">
+      <div class="account-left">
+        <span class="account-name">Jack Savings</span>
+        <span class="account-number">*******3124</span>
       </div>
-      <div class="txn-right">
-        <span class="amount debit">-$18.40</span>
+      <div class="account-right">
+        <span class="balance">$20,145.80</span>
         <span class="chevron">›</span>
       </div>
     </div>
 
-    <div class="txn declined-row">
-      <div class="txn-left">
-        <span class="merchant">Best Buy</span>
-        <span class="status-tag">Declined</span>
+    <div class="account-row has-button">
+      <div class="account-left">
+        <span class="account-name">Cashback Credit Card</span>
+        <span class="account-number">************1098</span>
+        <button class="pay-btn" type="button">Make a Payment</button>
       </div>
-      <div class="txn-right">
-        <span class="amount declined">-$193.49</span>
+      <div class="account-right">
+        <span class="balance negative">($2,109.21)</span>
         <span class="chevron">›</span>
       </div>
     </div>
 
     <div class="footer-note">
-      Huntington Bank
+      Demo preview only — sample data, not a real account.
     </div>
   </div>
 
